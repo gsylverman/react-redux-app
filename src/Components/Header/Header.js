@@ -1,4 +1,4 @@
-import React,{Component} from "react";
+import React, { Component } from "react";
 import { NavLink } from 'react-router-dom';
 import classes from "./Header.module.css";
 import Button from 'react-bootstrap/Button';
@@ -7,18 +7,18 @@ import Modal from "../Modal/Modal";
 
 class Header extends Component {
 
-  state={
-    show:false
+  state = {
+    show: false
   }
 
 
-  show=()=>{
-    this.setState({show:true});
+  show = () => {
+    this.setState({ show: true });
   }
 
 
-  closeModal=()=>{
-    this.setState({show:false});
+  closeModal = () => {
+    this.setState({ show: false });
 
   }
   render() {

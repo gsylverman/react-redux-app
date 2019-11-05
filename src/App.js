@@ -14,7 +14,7 @@ const App = (props) => {
         <>
           <Header />
 
-          <div style={{ background: "silver",height:"600px" }}>
+          <div style={{ background: "silver", height: "600px" }}>
             <Switch>
               <Route path="/form" component={Form} />
               <Route path="/" exact component={Home} />
