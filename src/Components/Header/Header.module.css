@@ -1,0 +1,18 @@
+.Header{
+    display: flex;
+    flex-direction: row;
+    
+    background: lightblue;
+    
+    
+    
+}
+.link{ 
+    padding: 1rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+.link:hover{
+    background: green;
+    color: white;
+}
