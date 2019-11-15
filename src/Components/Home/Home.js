@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { timeAction } from "../../actions/index.js";
 import { bindActionCreators } from "redux";
+import Footer from "../Footer/Footer.js";
 
 
 
@@ -42,8 +43,10 @@ class Home extends Component {
     }
 
     render() {
-        return (
-            <div style={{fontSize:"1.2em"}}>{this.props.clock.ora}</div>
+        return (<div>
+            <div style={{fontSize:"1.2em",background:"grey"}}>{this.props.clock.ora}</div>
+            <Footer />
+            </div>
         );
     }
 

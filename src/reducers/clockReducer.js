@@ -3,7 +3,9 @@ const initialState = {
 };
 
 const clockReducer = (state = initialState, action) => {
-    const newState = { ...initialState };
+    const newState = {
+        ...initialState
+    };
     if (action.type === "UPDATE") {
         newState.ora = action.payload;
         return newState;

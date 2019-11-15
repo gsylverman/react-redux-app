@@ -4,8 +4,8 @@ import Button from 'react-bootstrap/Button';
 
 const Footer = (props) => {
     return (
-        <footer>
-            <Button style={{ position: "absolute", left: "10px" }} variant="info">
+        <footer style={{ position: "absolute",width:"100%",bottom:"0",textAlign:"center" }} >
+            <Button style={{ position: "absolute", left: "10px",bottom:"10px" }} variant="info">
 
                 <NavLink style={{ textDecoration: "none" }}
                     to="/form"
@@ -19,6 +19,5 @@ const Footer = (props) => {
             Footer</footer>
     );
 };
-
 
 export default Footer;

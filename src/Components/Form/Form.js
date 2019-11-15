@@ -1,19 +1,18 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 import ContactForm from "./ContactForm/ContactForm";
-import InfiniteScrollList from "./InfiniteScrollList/InfiniteScrollList";
-
-
-
+import Infinite from "./InfiniteScroll/Infinite";
 
 class Form extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isDesktop: false //This is where I am having problems
+            isDesktop: false
         }
 
-        this.updatePredicate = this.updatePredicate.bind(this);
+        this.updatePredicate = this
+            .updatePredicate
+            .bind(this);
     }
     componentDidMount() {
         this.updatePredicate();
@@ -25,7 +24,9 @@ class Form extends Component {
     }
 
     updatePredicate() {
-        this.setState({ isDesktop: window.innerWidth > 900 });
+        this.setState({
+            isDesktop: window.innerWidth > 900
+        });
     }
 
     render() {
@@ -33,11 +34,14 @@ class Form extends Component {
 
         return (
             <div>
-                {isDesktop ? <ContactForm /> : <InfiniteScrollList />}
+                {
+                    isDesktop
+                        ? <ContactForm/>
+                        : <Infinite/>
+                }
             </div>
         );
     }
 }
-
 
 export default Form;
