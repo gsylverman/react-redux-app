@@ -1,111 +1,136 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Button from 'react-bootstrap/Button';
-// import { Container, Row, Col } from 'reactstrap';
-import {InputGroup, InputGroupAddon, Input} from 'reactstrap';
+import { Field, reduxForm } from "redux-form";
+import { reset } from 'redux-form';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { Input, Form, FormGroup, Label } from 'reactstrap';
+import { connect } from "react-redux";
 
 class ContactForm extends Component {
 
-    state = {
-        email: "",
-        age: "",
-        send: false
-    }
+    renderEmail = ({ input, meta }) => {
 
-    changeMail = (e) => {
-
-        this.setState({email: e.target.value});
-    }
-
-    changeAge = (e) => {
-
-        this.setState({age: e.target.value});
-
-    }
-
-    send = () => {
-        if (this.state.email !== "" && this.state.email.includes("@") && this.state.age > 16) {
-
-            this.setState({email: "", age: ""});
-
-        }
-        console.log("invalid data");
-
-        this.setState({email: "", age: ""});
-
-    }
-    send = () => {
-        this.setState({
-            send: !this.state.send
-        });
-
-    }
-
-    form = () => {
         return (
-            <> < InputGroup > <InputGroupAddon addonType="prepend">@</InputGroupAddon>
-            <Input
-                onChange={(e) => this.changeMail(e)}
-                value={this.state.email}
-                placeholder="email"/>
-        </InputGroup>
-        <br/>
-        <InputGroup>
-            <InputGroupAddon addonType="prepend">Age</InputGroupAddon>
-            <Input
-                onChange={(e) => this.changeAge(e)}
-                value={this.state.age}
-                placeholder="your age"
-                min={16}
-                max={100}
-                type="number"
-                step="1"/>
-            <InputGroupAddon addonType="append"></InputGroupAddon>
-        </InputGroup>
-        <br/></>
-        )
-    }
+            <div>
+                <FormGroup>
+                    <Label for="Email address">Email</Label>
+                    <Input
+                        {...input}
+                        type="email"
+                        name="email"
+                        id="exampleEmail"
+                        placeholder="email" />
 
-    validData = () => {
-        if (this.state.email.length > 0 && this.state.age > 15) {
-            return true;
-        }
-        return false;
+                </FormGroup>
+                <div >{
+                    meta.touched
+                        ? meta.error
+                        : ""
+                }</div>
+            </div>
+        );
+    };
+
+    todayDate = () => {
+        const date = new Date();
+        const day = date.getDate();
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        return `${month}/${day}/${year}`;
+    };
+
+    renderDate = ({ input, meta }) => {
+        return (
+            <div>
+                <FormGroup >
+                    <Label for="date">Birth Date:
+                    </Label>
+                    <DatePicker
+                        placeholderText={this.todayDate()}
+                        selected={input.value}
+                        onChange={input.onChange} />
+                </FormGroup>
+            </div>
+        );
+    };
+
+    renderTextarea = ({ input, meta }) => {
+        return (
+            <div>
+                <FormGroup>
+                    <Label for="exampleText">Text Area</Label>
+                    <Input {...input} type="textarea" name="text" id="exampleText" />
+                </FormGroup>
+
+                <div >{
+                    meta.touched
+                        ? meta.error
+                        : ""
+                }</div>
+            </div>
+        );
+    };
+
+    submit = values => {
+        const { email, date, textarea } = values;
+        alert(`
+        email: ${email} t\
+        date: ${date} t\
+        Message: ${textarea}
+        `);
+        this.props.reset();
     }
 
     render() {
         return (
-
-            <div
+            <Form
                 style={{
                     maxWidth: "500px",
-                    paddingTop: "5%",
-                    margin: "0 auto"
-                }}>
-                {
-                    this.state.send && this.validData()
-                        ? <div>
-                                email: {this.state.email}
-                                <br/>
-                                age: {this.state.age}
-                            </div>
-                        : this.form()
-                }
+                    margin: "0 auto",
+                    textAlign: "left",
+                    background:"lightcyan",
+                    // boxShadow:"1px 1px 1px 1px lightgrey",
+                    padding:"5px",
+                    borderRadius:"5%"
+                }}
+                onSubmit={this
+                    .props
+                    .handleSubmit(this.submit)}>
 
-                <Button
-                    onClick={this.send}
-                    style={{
-                        margin: "1.2em"
-                    }}
-                    variant="outline-primary">{
-                        this.validData()
-                            ? "Send"
-                            : "Your data is Invalid!"
-                    }</Button>
+                <Field name="email" component={this.renderEmail} />
+                <Field name="date" component={this.renderDate} />
+                <Field name="textarea" component={this.renderTextarea} />
 
-            </div>
+                <Button type="submit" variant="outline-primary">
+                    Submit
+                </Button>
+            </Form>
         );
     }
-
+};
+const validate = (values) => {
+    const errors = {};
+    if (!values.email) {
+        errors.email = "error!";
+    }
+    if (!values.date) {
+        errors.date = "error!";
+    }
+    if (!values.textarea) {
+        errors.textarea = "error!";
+    }
+    return errors;
 };
 
-export default ContactForm;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        reset: () => dispatch(reset('userForm'))
+    }
+};
+
+export default reduxForm({ form: "userForm", validate })(
+    connect(null, mapDispatchToProps)(
+        ContactForm
+    )
+);

@@ -18,6 +18,7 @@ class Form extends Component {
         this.updatePredicate();
         window.addEventListener("resize", this.updatePredicate);
     }
+    
 
     componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
