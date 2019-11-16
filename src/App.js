@@ -9,15 +9,11 @@ const App = (props) => {
     return (
         <BrowserRouter>
             <div className="App">
-
                 <Header/>
-               
-                    <Switch>
-                        <Route path="/form" component={Form}/>
-                        <Route path="/" exact component={Home}/>
-                    </Switch>
-               
-
+                <Switch>
+                    <Route path="/form" component={Form}/>
+                    <Route path="/" exact component={Home}/>
+                </Switch>
             </div>
         </BrowserRouter>
     );

@@ -1,33 +1,36 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import Button from 'react-bootstrap/Button';
-import { Field, reduxForm } from "redux-form";
-import { reset } from 'redux-form';
+import {Field, reduxForm} from "redux-form";
+import {reset} from 'redux-form';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { Input, Form, FormGroup, Label } from 'reactstrap';
-import { connect } from "react-redux";
+import {Input, Form, FormGroup, Label} from 'reactstrap';
+import {connect} from "react-redux";
 
 class ContactForm extends Component {
 
-    renderEmail = ({ input, meta }) => {
+    renderEmail = ({input, meta}) => {
 
         return (
             <div>
                 <FormGroup>
-                    <Label for="Email address">Email</Label>
+                    <Label for="Email address">Email:</Label>
                     <Input
                         {...input}
                         type="email"
                         name="email"
                         id="exampleEmail"
-                        placeholder="email" />
-
+                        placeholder="email"/>
+                    <div
+                        style={{
+                            color: "red"
+                        }}>{
+                            meta.touched
+                                ? meta.error
+                                : ""
+                        }</div>
                 </FormGroup>
-                <div >{
-                    meta.touched
-                        ? meta.error
-                        : ""
-                }</div>
+
             </div>
         );
     };
@@ -40,7 +43,7 @@ class ContactForm extends Component {
         return `${month}/${day}/${year}`;
     };
 
-    renderDate = ({ input, meta }) => {
+    renderDate = ({input, meta}) => {
         return (
             <div>
                 <FormGroup >
@@ -49,37 +52,61 @@ class ContactForm extends Component {
                     <DatePicker
                         placeholderText={this.todayDate()}
                         selected={input.value}
-                        onChange={input.onChange} />
+                        onChange={input.onChange}/>
+                    <div
+                        style={{
+                            color: "red"
+                        }}>
+                        {
+                            meta.touched
+                                ? meta.error
+                                : ""
+                        }</div>
                 </FormGroup>
+
             </div>
         );
     };
 
-    renderTextarea = ({ input, meta }) => {
+    renderTextarea = ({input, meta}) => {
         return (
             <div>
                 <FormGroup>
-                    <Label for="exampleText">Text Area</Label>
-                    <Input {...input} type="textarea" name="text" id="exampleText" />
+                    <Label for="exampleText">Message:
+                    </Label>
+                    <Input
+                        {...input}
+                        type="textarea"
+                        placeholder="message"
+                        name="text"
+                        id="exampleText"/>
+                    <div
+                        style={{
+                            color: "red"
+                        }}>{
+                            meta.touched
+                                ? meta.error
+                                : ""
+                        }</div>
                 </FormGroup>
 
-                <div >{
-                    meta.touched
-                        ? meta.error
-                        : ""
-                }</div>
             </div>
         );
     };
 
     submit = values => {
-        const { email, date, textarea } = values;
-        alert(`
+        const {email, date, textarea} = values;
+
+        alert(
+            `
         email: ${email} t\
         date: ${date} t\
         Message: ${textarea}
-        `);
-        this.props.reset();
+        `
+        );
+        this
+            .props
+            .reset();
     }
 
     render() {
@@ -89,20 +116,20 @@ class ContactForm extends Component {
                     maxWidth: "500px",
                     margin: "0 auto",
                     textAlign: "left",
-                    background:"lightcyan",
+                    background: "lightcyan",
                     // boxShadow:"1px 1px 1px 1px lightgrey",
-                    padding:"5px",
-                    borderRadius:"5%"
+                    padding: "5px",
+                    borderRadius: "5%"
                 }}
                 onSubmit={this
                     .props
                     .handleSubmit(this.submit)}>
 
-                <Field name="email" component={this.renderEmail} />
-                <Field name="date" component={this.renderDate} />
-                <Field name="textarea" component={this.renderTextarea} />
+                <Field name="email" component={this.renderEmail}/>
+                <Field name="date" component={this.renderDate}/>
+                <Field name="textarea" component={this.renderTextarea}/>
 
-                <Button type="submit" variant="outline-primary">
+                <Button className="btn-lg btn-block" type="submit" variant="outline-primary">
                     Submit
                 </Button>
             </Form>
@@ -110,16 +137,32 @@ class ContactForm extends Component {
     }
 };
 const validate = (values) => {
+
     const errors = {};
+
     if (!values.email) {
-        errors.email = "error!";
+        errors.email = "Please enter a valid email!";
     }
     if (!values.date) {
-        errors.date = "error!";
+        errors.date = "Please enter your birthday!";
     }
+    if (values.date) {
+        const age = new Date().getFullYear() - values
+            .date
+            .getFullYear();
+        if (age < 17) {
+            errors.date = 'Hmm, you seem a bit young...'
+        }
+    }
+
     if (!values.textarea) {
-        errors.textarea = "error!";
+        errors.textarea = "Please leave a message!";
+    } else if (values.textarea.length < 15) {
+        errors.textarea = "Your message is too short!";
+    } else if (values.textarea.length > 255) {
+        errors.textarea = "Your message is too long!";
     }
+
     return errors;
 };
 
@@ -129,7 +172,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default reduxForm({ form: "userForm", validate })(
+export default reduxForm({form: "userForm", validate})(
     connect(null, mapDispatchToProps)(
         ContactForm
     )

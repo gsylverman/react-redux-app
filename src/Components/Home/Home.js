@@ -1,21 +1,15 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { timeAction } from "../../actions/index.js";
-import { bindActionCreators } from "redux";
+import React, {Component} from "react";
+import {connect} from "react-redux";
+import {timeAction} from "../../actions/index.js";
+import {bindActionCreators} from "redux";
 import Footer from "../Footer/Footer.js";
-
-
 
 class Home extends Component {
 
     componentDidMount() {
-  
         setInterval(() => {
             this.props.changeTime(this.timeFormater())
         }, 1000);
-        
-  
-
     }
 
     timeFormater = () => {
@@ -28,30 +22,31 @@ class Home extends Component {
         if (h === 0) {
             h = 12;
         }
-
         if (h > 12) {
             h = h - 12;
             session = "PM";
         }
-
-        h = (h < 10) ? "0" + h : h;
-        m = (m < 10) ? "0" + m : m;
-        s = (s < 10) ? "0" + s : s;
+        h = (h < 10)? "0" + h: h;
+        m = (m < 10)? "0" + m: m;
+        s = (s < 10)? "0" + s: s;
 
         let time = h + ":" + m + ":" + s + " " + session;
         return time;
     }
 
     render() {
-        return (<div>
-            <div style={{fontSize:"1.2em",background:"grey"}}>{this.props.clock.ora}</div>
-            <Footer />
+        return (
+            <div>
+                <div
+                    style={{
+                        fontSize: "1.2em",
+                        background: "grey"
+                    }}>{this.props.clock.ora}</div>
+                <Footer/>
             </div>
         );
     }
-
 };
-
 
 const mapStateToProps = (state) => {
     return state;
@@ -61,11 +56,6 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         changeTime: timeAction
     }, dispatch);
-
-
 }
-
-
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

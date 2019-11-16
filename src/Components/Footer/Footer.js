@@ -1,21 +1,34 @@
 import React from "react";
-import { NavLink } from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 const Footer = (props) => {
     return (
-        <footer style={{ position: "absolute",width:"100%",bottom:"0",textAlign:"center" }} >
-            <Button style={{ position: "absolute", left: "10px",bottom:"10px" }} variant="info">
+        <footer
+            style={{
+                position: "absolute",
+                width: "100%",
+                bottom: "0",
+                textAlign: "center"
+            }}>
+            <Button
+                style={{
+                    position: "absolute",
+                    left: "10px",
+                    bottom: "10px"
+                }}
+                variant="info">
 
-                <NavLink style={{ textDecoration: "none" }}
+                <NavLink
+                    style={{
+                        textDecoration: "none"
+                    }}
                     to="/form"
-                    activeStyle={{ color: 'white' }}
-
-                >Contact</NavLink>
+                    activeStyle={{
+                        color: 'white'
+                    }}>Contact</NavLink>
             </Button>
-
-            <br />
-
+            <br/>
             Footer</footer>
     );
 };

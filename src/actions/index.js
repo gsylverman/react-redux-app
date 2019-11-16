@@ -3,5 +3,4 @@ export const timeAction = (p) => {
         type: "UPDATE",
         payload: p
     };
-
 };
