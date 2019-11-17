@@ -1,90 +1,42 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import InfiniteScroll from 'react-infinite-scroll-component';
+import React, {Component} from 'react';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import InfiniteScroll from 'react-infinite-scroller';
+import {requestAction} from "../../../actions/index";
+import Image from "./Image/Image";
 
 class Infinite extends Component {
 
-    state = {
-        images: [],
-        page: 1,
-        load: false
-    }
-
-    makeRequest = () => {
-        const api = "https://api.unsplash.com/search/";
-        const key = "d04727baedc1f0d2f2b90c66d70596afd8f2f407ba84a10c3ab6765f4975b7f0";
-        this.setState({ load: true });
-        axios
-            .get(api, {
-                params: {
-                    query: "photos",
-                    page: this.state.page
-                },
-                headers: {
-                    Authorization: `Client-ID ${key}`
-                }
-            })
-            .then(data => {
-                if (data.status === 200) {
-                    this.setState({
-                        images: [
-                            ...this.state.images,
-                            ...data.data.photos.results
-                        ]
-                    });
-                }
-                this.setState({ load: false });
-            })
-            .catch(err => {
-                console.log(err)
-            });
-    }
-
-    componentDidMount() {
-        this.makeRequest();
-        window.addEventListener("scroll", this.changePage, false);
-    }
-
-    changePage = () => {
-
-        let scrollTop = window.scrollY;
-        let bodyHeight = document.body.scrollHeight;
-        let windowHeight = window.innerHeight;
-        let scrollPercent = (scrollTop) / (bodyHeight - windowHeight);
-        let scrollPercentRounded = Math.round(scrollPercent * 100);
-        if (scrollPercentRounded >= 100) {
-            let oldPage = this.state.page;
-
-            this.setState({
-                page: oldPage + 1
-            });
-            this.makeRequest();
-            console.log("next");
-        }
-
+    loadMoreImages() {
+        this.props.changePage(this.props.page);
     }
 
     ImagesComp = () => {
-        return this
-            .state
-            .images
-            .map(img => {
-
-                return <img src={img.urls.small} key={Math.random()} alt="img" />
+        return this.props.images.map(img => {
+                return (
+                    <Image src={img.urls.small} key={Math.random()}/>
+                );
             });
     }
 
     render() {
         return (
-            <div style={{ maxWidth: "90%", margin: "0 auto" }}>
+            <div
+                style={{
+                    maxWidth: "90%",
+                    margin: "0 auto",
+                    height: "500px",
+                    overflow: "auto"
+                }}>
                 <InfiniteScroll
-                    pageStart={this.state.page}
-                    loadMore={this.changePage}
+                    pageStart={0}
+                    loadMore={this
+                        .loadMoreImages
+                        .bind(this)}
                     hasMore={true}
-                    loader={
-                        <div key={0} >
-                            Loading ...
-                    </div>}
+                    loader={<div key = {
+                        0
+                    } > Loading ...</div>}
                     useWindow={false}>
 
                     <div>
@@ -96,4 +48,14 @@ class Infinite extends Component {
     }
 }
 
-export default Infinite;
+const mapStateToProps = (state) => {
+    return state.infinite;
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        changePage: requestAction
+    }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Infinite);

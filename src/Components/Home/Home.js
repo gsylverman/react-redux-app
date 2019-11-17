@@ -7,9 +7,13 @@ import Footer from "../Footer/Footer.js";
 class Home extends Component {
 
     componentDidMount() {
-        setInterval(() => {
-            this.props.changeTime(this.timeFormater())
+        this.time = setInterval(() => {
+            this.props.changeTime(this.timeFormater());
         }, 1000);
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.time);
     }
 
     timeFormater = () => {
