@@ -11,12 +11,12 @@ class Infinite extends Component {
         this.props.changePage(this.props.page);
     }
 
-    ImagesComp = () => {
+    images = () => {
         return this.props.images.map(img => {
-                return (
-                    <Image src={img.urls.small} key={Math.random()}/>
-                );
-            });
+            return (
+                <Image src={img.urls.small} key={Math.random()}/>
+            );
+        });
     }
 
     render() {
@@ -30,17 +30,12 @@ class Infinite extends Component {
                 }}>
                 <InfiniteScroll
                     pageStart={0}
-                    loadMore={this
-                        .loadMoreImages
-                        .bind(this)}
+                    loadMore={this.loadMoreImages.bind(this)}
                     hasMore={true}
-                    loader={<div key = {
-                        0
-                    } > Loading ...</div>}
+                    loader={<div key = {0} >Loading ...</div>}
                     useWindow={false}>
-
                     <div>
-                        {this.ImagesComp()}
+                        {this.images()}
                     </div>
                 </InfiniteScroll>
             </div>

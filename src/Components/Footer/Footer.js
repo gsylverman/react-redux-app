@@ -19,17 +19,15 @@ const Footer = (props) => {
                 }}
                 variant="info">
 
-                <NavLink
-                    style={{
-                        textDecoration: "none"
-                    }}
+                <NavLink style={{textDecoration: "none"}}
                     to="/form"
-                    activeStyle={{
-                        color: 'white'
-                    }}>Contact</NavLink>
+                    activeStyle={{ color: 'white'}}>
+                 Contact
+                </NavLink>
             </Button>
             <br/>
-            Footer</footer>
+         Footer
+        </footer>
     );
 };
 

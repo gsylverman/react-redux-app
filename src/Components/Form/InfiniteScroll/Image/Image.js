@@ -1,7 +1,7 @@
 import React from "react";
 
 const Image = (props) => {
-    return (<img src={props.src} alt="img"/>);
+    return (<img style={{maxWidth:"100%"}} src={props.src} alt="img"/>);
 }
 
 export default Image;

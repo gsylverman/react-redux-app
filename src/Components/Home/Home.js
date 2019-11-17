@@ -41,11 +41,9 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <div
-                    style={{
-                        fontSize: "1.2em",
-                        background: "grey"
-                    }}>{this.props.clock.ora}</div>
+                <div style={{fontSize: "1.4em",background: "lightgrey"}}>
+                    {this.props.clock.ora}
+                </div>
                 <Footer/>
             </div>
         );

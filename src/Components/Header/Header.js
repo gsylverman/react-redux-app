@@ -21,18 +21,17 @@ class Header extends Component {
         return (
 
             <header className={classes.Header}>
-                <NavLink
-                    activeStyle={{
-                        color: 'white'
-                    }}
+                <NavLink exact
+                    activeStyle={{fontWeight: "bold",color:"white"}}
                     className={classes.link}
-                    to="/">Home</NavLink><br/>
+                    to="/">Home
+                </NavLink>
                 <NavLink
                     className={classes.link}
                     to="/form"
-                    activeStyle={{
-                        color: 'white'
-                    }}>Contact</NavLink><br/>
+                    activeStyle={{fontWeight: "bold",color:"white"}}>
+                    Contact
+                </NavLink>
                 <Button onClick={this.show} variant="light">Contact Us
                 </Button>
                 <Modal show={this.state.show} modalClosed={this.closeModal}>
@@ -41,11 +40,9 @@ class Header extends Component {
                     a reader will be distracted by the readable content of a page when looking at
                     its layout.
                 </Modal>
-
             </header>
         );
     }
-
 };
 
 export default Header;

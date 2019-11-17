@@ -10,9 +10,7 @@ class Form extends Component {
             isDesktop: false
         }
 
-        this.updatePredicate = this
-            .updatePredicate
-            .bind(this);
+        this.updatePredicate = this.updatePredicate.bind(this);
     }
     componentDidMount() {
         this.updatePredicate();
@@ -34,11 +32,7 @@ class Form extends Component {
 
         return (
             <div>
-                {
-                    isDesktop
-                        ? <ContactForm/>
-                        : <Infinite/>
-                }
+                {isDesktop? <ContactForm/>: <Infinite/>}
             </div>
         );
     }

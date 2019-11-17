@@ -21,16 +21,10 @@ class ContactForm extends Component {
                         name="email"
                         id="exampleEmail"
                         placeholder="email"/>
-                    <div
-                        style={{
-                            color: "red"
-                        }}>{
-                            meta.touched
-                                ? meta.error
-                                : ""
-                        }</div>
+                    <div style={{color: "red"}}>
+                        {meta.touched? meta.error:""}
+                    </div>
                 </FormGroup>
-
             </div>
         );
     };
@@ -53,17 +47,10 @@ class ContactForm extends Component {
                         placeholderText={this.todayDate()}
                         selected={input.value}
                         onChange={input.onChange}/>
-                    <div
-                        style={{
-                            color: "red"
-                        }}>
-                        {
-                            meta.touched
-                                ? meta.error
-                                : ""
-                        }</div>
+                    <div style={{color: "red"}}>
+                        {meta.touched? meta.error:""}
+                    </div>
                 </FormGroup>
-
             </div>
         );
     };
@@ -80,16 +67,10 @@ class ContactForm extends Component {
                         placeholder="message"
                         name="text"
                         id="exampleText"/>
-                    <div
-                        style={{
-                            color: "red"
-                        }}>{
-                            meta.touched
-                                ? meta.error
-                                : ""
-                        }</div>
+                    <div style={{color: "red"}}>
+                        {meta.touched? meta.error:""}
+                    </div>
                 </FormGroup>
-
             </div>
         );
     };
@@ -97,16 +78,8 @@ class ContactForm extends Component {
     submit = values => {
         const {email, date, textarea} = values;
 
-        alert(
-            `
-        email: ${email} t\
-        date: ${date} t\
-        Message: ${textarea}
-        `
-        );
-        this
-            .props
-            .reset();
+        alert(`email: ${email} date: ${date} Message: ${textarea}`);
+        this.props.reset();
     }
 
     render() {
@@ -121,9 +94,7 @@ class ContactForm extends Component {
                     padding: "5px",
                     borderRadius: "5%"
                 }}
-                onSubmit={this
-                    .props
-                    .handleSubmit(this.submit)}>
+                onSubmit={this.props.handleSubmit(this.submit)}>
 
                 <Field name="email" component={this.renderEmail}/>
                 <Field name="date" component={this.renderDate}/>
@@ -147,10 +118,8 @@ const validate = (values) => {
         errors.date = "Please enter your birthday!";
     }
     if (values.date) {
-        const age = new Date().getFullYear() - values
-            .date
-            .getFullYear();
-        if (age < 17) {
+        const age = new Date().getFullYear() - values.date.getFullYear();
+        if (age < 16) {
             errors.date = 'Hmm, you seem a bit young...'
         }
     }
@@ -168,7 +137,7 @@ const validate = (values) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        reset: () => dispatch(reset('userForm'))
+        reset: () => dispatch(reset("userForm"))
     }
 };
 
