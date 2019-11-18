@@ -1,5 +1,4 @@
 import React from "react";
-import {NavLink} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 
 const Footer = (props) => {
@@ -13,19 +12,14 @@ const Footer = (props) => {
                 bottom: "0",
                 textAlign: "center"
             }}>
-            <Button
+            <Button onClick={props.showModal}
                 style={{
                     position: "absolute",
-                    left: "10px",
-                    bottom: "10px"
+                    top:"5px",
+                    left: "10px"
                 }}
                 variant="info">
-
-                <NavLink style={{textDecoration: "none"}}
-                    to="/form"
-                    activeStyle={{ color: 'white'}}>
-                 Contact
-                </NavLink>
+                 Contact Us 
             </Button>
             <br/>
          Footer
