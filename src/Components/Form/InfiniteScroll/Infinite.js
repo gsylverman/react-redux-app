@@ -21,13 +21,13 @@ class Infinite extends Component {
 
     render() {
         return (
-            <div
-                style={{
-                    maxWidth: "90%",
-                    margin: "0 auto",
-                    height: "500px",
-                    overflow: "auto"
-                }}>
+            <div infinite-scroll-container="'body'"
+            style={{
+                maxWidth: "90%",
+                margin: "0 auto",
+                height:"500px",
+                overflow: "auto"
+            }}>
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.loadMoreImages.bind(this)}

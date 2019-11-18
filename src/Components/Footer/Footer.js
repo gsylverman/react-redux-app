@@ -6,8 +6,10 @@ const Footer = (props) => {
     return (
         <footer
             style={{
-                position: "absolute",
-                width: "100%",
+                position:"absolute",
+                width:"100%",
+                background:"lightblue",
+                right:"0",
                 bottom: "0",
                 textAlign: "center"
             }}>

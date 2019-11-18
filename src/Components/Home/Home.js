@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import {timeAction} from "../../actions/index.js";
 import {bindActionCreators} from "redux";
-import Footer from "../Footer/Footer.js";
 
 class Home extends Component {
 
@@ -44,7 +43,6 @@ class Home extends Component {
                 <div style={{fontSize: "1.4em",background: "lightgrey"}}>
                     {this.props.clock.ora}
                 </div>
-                <Footer/>
             </div>
         );
     }
