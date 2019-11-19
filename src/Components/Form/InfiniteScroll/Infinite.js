@@ -8,7 +8,8 @@ import Image from "./Image/Image";
 class Infinite extends Component {
 
     loadMoreImages() {
-        this.props.changePage(this.props.page);
+       
+        this.props.changePage();
     }
 
     images = () => {
@@ -17,6 +18,9 @@ class Infinite extends Component {
                 <Image src={img.urls.small} key={Math.random()}/>
             );
         });
+    }
+    componentWillUnmount(){
+        this.props.reset();
     }
 
     render() {
@@ -49,7 +53,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        changePage: requestAction
+        changePage: requestAction,
+        reset:()=>({type:"RESET",payload:null})
     }, dispatch);
 }
 

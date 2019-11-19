@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { connect } from "react-redux";
-
 import Home from './Components/Home/Home';
 import Form from './Components/Form/Form';
 import Header from './Components/Header/Header';
 import Footer from './Components/Footer/Footer';
 
 class App extends Component {
-
 
     showModal = () => {
         this.props.modalShow();
@@ -20,7 +18,6 @@ class App extends Component {
     }
 
     render() {
-
         return (
             <BrowserRouter>
                 <div className="App">

@@ -16,7 +16,7 @@ const modalReducer = (state = initialState, action) => {
             newState.show = false;
             return newState;
         default:
-            break
+            break;
     }
     return state;
 };

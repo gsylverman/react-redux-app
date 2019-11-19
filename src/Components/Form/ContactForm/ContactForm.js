@@ -1,15 +1,15 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import Button from 'react-bootstrap/Button';
-import {Field, reduxForm} from "redux-form";
-import {reset} from 'redux-form';
+import { Field, reduxForm } from "redux-form";
+import { reset } from 'redux-form';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import {Input, Form, FormGroup, Label} from 'reactstrap';
-import {connect} from "react-redux";
+import { Input, Form, FormGroup, Label } from 'reactstrap';
+import { connect } from "react-redux";
 
 class ContactForm extends Component {
 
-    renderEmail = ({input, meta}) => {
+    renderEmail = ({ input, meta }) => {
 
         return (
             <div>
@@ -20,9 +20,9 @@ class ContactForm extends Component {
                         type="email"
                         name="email"
                         id="exampleEmail"
-                        placeholder="email"/>
-                    <div style={{color: "red"}}>
-                        {meta.touched? meta.error:""}
+                        placeholder="email" />
+                    <div style={{ color: "red" }}>
+                        {meta.touched ? meta.error : ""}
                     </div>
                 </FormGroup>
             </div>
@@ -37,7 +37,7 @@ class ContactForm extends Component {
         return `${month}/${day}/${year}`;
     };
 
-    renderDate = ({input, meta}) => {
+    renderDate = ({ input, meta }) => {
         return (
             <div>
                 <FormGroup >
@@ -46,16 +46,16 @@ class ContactForm extends Component {
                     <DatePicker
                         placeholderText={this.todayDate()}
                         selected={input.value}
-                        onChange={input.onChange}/>
-                    <div style={{color: "red"}}>
-                        {meta.touched? meta.error:""}
+                        onChange={input.onChange} />
+                    <div style={{ color: "red" }}>
+                        {meta.touched ? meta.error : ""}
                     </div>
                 </FormGroup>
             </div>
         );
     };
 
-    renderTextarea = ({input, meta}) => {
+    renderTextarea = ({ input, meta }) => {
         return (
             <div>
                 <FormGroup>
@@ -66,9 +66,9 @@ class ContactForm extends Component {
                         type="textarea"
                         placeholder="message"
                         name="text"
-                        id="exampleText"/>
-                    <div style={{color: "red"}}>
-                        {meta.touched? meta.error:""}
+                        id="exampleText" />
+                    <div style={{ color: "red" }}>
+                        {meta.touched ? meta.error : ""}
                     </div>
                 </FormGroup>
             </div>
@@ -76,7 +76,7 @@ class ContactForm extends Component {
     };
 
     submit = values => {
-        const {email, date, textarea} = values;
+        const { email, date, textarea } = values;
 
         alert(`email: ${email} date: ${date} Message: ${textarea}`);
         this.props.reset();
@@ -84,26 +84,28 @@ class ContactForm extends Component {
 
     render() {
         return (
+            <div style={{ fontSize: "1.2rem", fontWeight: "bold", padding: "5px", textAlign: "center", background: "lightcyan", border: "1px solid #DBDBDB", borderRadius: "5px", margin: "10% auto", maxWidth: "550px" }}>Form
             <Form
-                style={{
-                    maxWidth: "500px",
-                    margin: "0 auto",
-                    textAlign: "left",
-                    background: "lightcyan",
-                    // boxShadow:"1px 1px 1px 1px lightgrey",
-                    padding: "5px",
-                    borderRadius: "5%"
-                }}
-                onSubmit={this.props.handleSubmit(this.submit)}>
+                    style={{
+                        fontWeight: "normal",
+                        maxWidth: "500px",
+                        margin: "20px auto",
+                        textAlign: "left",
+                        // boxShadow:"1px 1px 1px 1px lightgrey",
+                        padding: "5px",
+                        borderRadius: "5%"
+                    }}
+                    onSubmit={this.props.handleSubmit(this.submit)}>
 
-                <Field name="email" component={this.renderEmail}/>
-                <Field name="date" component={this.renderDate}/>
-                <Field name="textarea" component={this.renderTextarea}/>
+                    <Field name="email" component={this.renderEmail} />
+                    <Field name="date" component={this.renderDate} />
+                    <Field name="textarea" component={this.renderTextarea} />
 
-                <Button className="btn-lg btn-block" type="submit" variant="outline-primary">
-                    Submit
+                    <Button className="btn-lg btn-block" type="submit" variant="outline-primary">
+                        Submit
                 </Button>
-            </Form>
+                </Form>
+            </div>
         );
     }
 };
@@ -141,7 +143,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export default reduxForm({form: "userForm", validate})(
+export default reduxForm({ form: "userForm", validate })(
     connect(null, mapDispatchToProps)(
         ContactForm
     )
