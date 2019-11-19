@@ -6,9 +6,10 @@ const initialState = {
 const infSReducer = (state = initialState, action) => {
 
     const newState = {
-        ...state
+        ...state,
+        images: [...state.images]
     };
-
+    
     switch (action.type) {
         case "LOAD":
             newState.images = [
@@ -22,7 +23,6 @@ const infSReducer = (state = initialState, action) => {
         default:
             break;
     }
-
     return state;
 };
 export default infSReducer;
