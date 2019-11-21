@@ -14,7 +14,7 @@ class ContactForm extends Component {
         return (
             <div>
                 <FormGroup>
-                    <Label for="Email address">Email:</Label>
+                    <Label htmlFor="Email address">Email:</Label>
                     <Input
                         {...input}
                         type="email"
@@ -41,7 +41,7 @@ class ContactForm extends Component {
         return (
             <div>
                 <FormGroup >
-                    <Label for="date">Birth Date:
+                    <Label htmlFor="date">Birth Date:
                     </Label>
                     <DatePicker
                         placeholderText={this.todayDate()}
@@ -59,7 +59,7 @@ class ContactForm extends Component {
         return (
             <div>
                 <FormGroup>
-                    <Label for="exampleText">Message:
+                    <Label htmlFor="exampleText">Message:
                     </Label>
                     <Input
                         {...input}
