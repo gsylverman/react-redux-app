@@ -10,7 +10,6 @@ import { connect } from "react-redux";
 class ContactForm extends Component {
 
     renderEmail = ({ input, meta }) => {
-
         return (
             <div>
                 <FormGroup>

@@ -1,5 +1,5 @@
 const initialState = {
-    ora: ""
+    ora: null
 };
 
 const clockReducer = (state = initialState, action) => {

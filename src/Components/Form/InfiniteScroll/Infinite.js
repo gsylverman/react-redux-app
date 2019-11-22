@@ -7,7 +7,7 @@ import Image from "./Image/Image";
 
 class Infinite extends Component {
 
-    loadMoreImages() {
+    loadMoreImages=()=> {
        
         this.props.changePage();
     }
@@ -34,7 +34,7 @@ class Infinite extends Component {
             }}>
                 <InfiniteScroll
                     pageStart={0}
-                    loadMore={this.loadMoreImages.bind(this)}
+                    loadMore={this.loadMoreImages}
                     hasMore={true}
                     loader={<div key = {0} >Loading ...</div>}
                     useWindow={false}>

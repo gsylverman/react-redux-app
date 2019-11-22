@@ -1,11 +1,12 @@
-import React, {Component} from "react";
-import {connect} from "react-redux";
-import {timeAction} from "../../actions/index.js";
-import {bindActionCreators} from "redux";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { timeAction } from "../../actions/index.js";
+import { bindActionCreators } from "redux";
 
 class Home extends Component {
 
     componentDidMount() {
+        this.props.changeTime(this.timeFormater());
         this.time = setInterval(() => {
             this.props.changeTime(this.timeFormater());
         }, 1000);
@@ -13,6 +14,7 @@ class Home extends Component {
 
     componentWillUnmount() {
         clearInterval(this.time);
+        this.props.changeTime(null);
     }
 
     timeFormater = () => {
@@ -29,9 +31,9 @@ class Home extends Component {
             h = h - 12;
             session = "PM";
         }
-        h = (h < 10)? "0" + h: h;
-        m = (m < 10)? "0" + m: m;
-        s = (s < 10)? "0" + s: s;
+        h = (h < 10) ? "0" + h : h;
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
 
         let time = h + ":" + m + ":" + s + " " + session;
         return time;
@@ -40,7 +42,7 @@ class Home extends Component {
     render() {
         return (
             <div>
-                <div style={{fontSize: "1.4em",background: "lightgrey"}}>
+                <div style={{ fontSize: "1.4em", background: "lightgrey" }}>
                     {this.props.clock.ora}
                 </div>
             </div>

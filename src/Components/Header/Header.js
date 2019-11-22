@@ -6,10 +6,8 @@ import Modal from "../Modal/Modal";
 
 class Header extends Component {
 
-
     render() {
         return (
-
             <header className={classes.Header}>
                 <NavLink exact
                     activeStyle={{ fontWeight: "bold", color: "white" }}

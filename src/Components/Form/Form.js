@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 
 import ContactForm from "./ContactForm/ContactForm";
 import Infinite from "./InfiniteScroll/Infinite";
@@ -8,7 +8,7 @@ class Form extends Component {
         super(props);
         this.state = {
             isDesktop: false
-        }
+        };
 
         this.updatePredicate = this.updatePredicate.bind(this);
     }
@@ -16,7 +16,7 @@ class Form extends Component {
         this.updatePredicate();
         window.addEventListener("resize", this.updatePredicate);
     }
-    
+
     componentWillUnmount() {
         window.removeEventListener("resize", this.updatePredicate);
     }
@@ -32,7 +32,7 @@ class Form extends Component {
 
         return (
             <div>
-                {isDesktop? <ContactForm/>: <Infinite/>}
+                {isDesktop ? <ContactForm /> : <Infinite />}
             </div>
         );
     }

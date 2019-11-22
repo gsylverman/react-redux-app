@@ -39,5 +39,5 @@ export const requestAction = () => {
             .catch(err => {
                 console.log(err);
             });
-    }
-}
+    };
+};
