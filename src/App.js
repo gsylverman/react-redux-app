@@ -22,7 +22,7 @@ class App extends Component {
             <BrowserRouter>
                 <div className="App">
                     <Header
-                        show={this.props.show}
+                        show={this.props.modal.show}
                         showModal={this.showModal}
                         modalClosed={this.closeModal}
                     />
@@ -31,9 +31,7 @@ class App extends Component {
                         <Route path="/" exact component={Home} />
                     </Switch>
                     <Footer
-                        show={this.props.show}
                         showModal={this.showModal}
-                        modalClosed={this.closeModal}
                     />
                 </div>
             </BrowserRouter>
@@ -42,7 +40,9 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return state.modal;
+    return {
+        modal: state.modal
+    };
 };
 
 const mapDispatchToProps = (disapatch) => {

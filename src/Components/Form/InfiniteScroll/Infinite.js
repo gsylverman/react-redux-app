@@ -1,42 +1,42 @@
-import React, {Component} from 'react';
-import {connect} from "react-redux";
-import {bindActionCreators} from "redux";
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import InfiniteScroll from 'react-infinite-scroller';
-import {requestAction} from "../../../actions/index";
+import { requestAction } from "../../../actions/index";
 import Image from "./Image/Image";
 
 class Infinite extends Component {
 
-    loadMoreImages=()=> {
-       
+    loadMoreImages = () => {
+
         this.props.changePage();
     }
 
     images = () => {
         return this.props.images.map(img => {
             return (
-                <Image src={img.urls.small} key={Math.random()}/>
+                <Image src={img.urls.small} key={Math.random()} />
             );
         });
     }
-    componentWillUnmount(){
+    componentWillUnmount() {
         this.props.reset();
     }
 
     render() {
         return (
             <div infinite-scroll-container="'body'"
-            style={{
-                maxWidth: "90%",
-                margin: "0 auto",
-                height:"500px",
-                overflow: "auto"
-            }}>
+                style={{
+                    maxWidth: "90%",
+                    margin: "0 auto",
+                    height: "500px",
+                    overflow: "auto"
+                }}>
                 <InfiniteScroll
                     pageStart={0}
                     loadMore={this.loadMoreImages}
                     hasMore={true}
-                    loader={<div key = {0} >Loading ...</div>}
+                    loader={<div key={0} >Loading ...</div>}
                     useWindow={false}>
                     <div>
                         {this.images()}
@@ -48,14 +48,16 @@ class Infinite extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return state.infinite;
+    return {
+        images: state.infinite.images
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         changePage: requestAction,
-        reset:()=>({type:"RESET",payload:null})
+        reset: () => ({ type: "RESET", payload: null })
     }, dispatch);
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Infinite);

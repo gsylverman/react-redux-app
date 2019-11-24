@@ -107,7 +107,7 @@ class ContactForm extends Component {
             </div>
         );
     }
-};
+}
 const validate = (values) => {
 
     const errors = {};
@@ -139,7 +139,7 @@ const validate = (values) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         reset: () => dispatch(reset("userForm"))
-    }
+    };
 };
 
 export default reduxForm({ form: "userForm", validate })(

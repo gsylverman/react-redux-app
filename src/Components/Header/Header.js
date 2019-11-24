@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from "../Modal/Modal";
 
 class Header extends Component {
-
+    
     render() {
         return (
             <header className={classes.Header}>

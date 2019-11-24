@@ -29,7 +29,6 @@ class Form extends Component {
 
     render() {
         const isDesktop = this.state.isDesktop;
-
         return (
             <div>
                 {isDesktop ? <ContactForm /> : <Infinite />}

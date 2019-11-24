@@ -48,10 +48,12 @@ class Home extends Component {
             </div>
         );
     }
-};
+}
 
 const mapStateToProps = (state) => {
-    return state;
+    return {
+        clock: state.clock
+    };
 };
 
 const mapDispatchToProps = (dispatch) => {
